@@ -41,7 +41,7 @@ public class buzzFizz extends Thread {
 
     //Constructor vacio
     public buzzFizz() {
-        // PropertyConfigurator.configure(url);
+        PropertyConfigurator.configure(url);
     }
 
     //constructor parametrizado con todos las variables de la clase
