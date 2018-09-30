@@ -23,8 +23,11 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class buzzFizz extends Thread {
 
-    //private final static Logger log = Logger.getLogger(buzzFizz.class);
-    //URL url = buzzFizz.class.getResource("config/log4j.properties");
+    /*
+    *Variables necesarias para el logger de log4j
+     */
+    private final static Logger log = Logger.getLogger(buzzFizz.class);
+    URL url = buzzFizz.class.getResource("config/log4j.properties");
 
     /*
     *Variables propias de la clase
@@ -38,7 +41,7 @@ public class buzzFizz extends Thread {
 
     //Constructor vacio
     public buzzFizz() {
-       // PropertyConfigurator.configure(url);
+        // PropertyConfigurator.configure(url);
     }
 
     //constructor parametrizado con todos las variables de la clase
@@ -72,7 +75,7 @@ public class buzzFizz extends Thread {
         } catch (FileNotFoundException ex) {
             throw new PathException("Problema al encontrar el archivo. La ruta es absoluta, canviar a relativa o a la propia del ordenador!");
         } catch (IOException ex) {
-            //log.error("Error de IOException : " + ex);
+            log.error("Error de IOException : " + ex);
         }
     }
 
@@ -86,7 +89,7 @@ public class buzzFizz extends Thread {
                 resultado.add(tir.getResultado());
             }
         } catch (Exception e) {
-           // log.error("Ha habido un error, probablemente la lista.");
+            log.error("Ha habido un error, probablemente la lista.");
         }
     }
 
@@ -99,7 +102,7 @@ public class buzzFizz extends Thread {
                 resultadoVista += "<li> " + list + "</li>";
             }
         } catch (Exception e) {
-           // log.error("Ha habido un error, probablemente la lista.");
+            log.error("Ha habido un error, probablemente la lista.");
         }
 
         resultadoVista += "</ul>";
@@ -109,9 +112,9 @@ public class buzzFizz extends Thread {
     public void run() {
         try {
             escribirArchivo();
-           // log.info("Escribiendo el archivo.");
+            log.info("Escribiendo el archivo.");
         } catch (PathException ex) {
-           // log.warn("Problema al escribir el archivo de series.");
+            log.warn("Problema al escribir el archivo de series.");
         }
     }
 
@@ -121,7 +124,6 @@ public class buzzFizz extends Thread {
             Date d = new Date();
             String serieConFecha = d + resultado.toString();
 
-            // FileWriter fsortida = new FileWriter("C:\\Users\\Jordi Gutierrez\\Desktop\\SERVLETJSP\\Prueba webrest\\web\\proba.txt");
             FileWriter fsortida = new FileWriter("C:\\Users\\Jordi Gutierrez\\Desktop\\SERVLETJSP\\Prueba webrest\\src\\java\\archivos\\series.txt", true);
 
             BufferedWriter bsortida = new BufferedWriter(fsortida);

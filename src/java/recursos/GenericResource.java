@@ -34,8 +34,11 @@ import org.apache.log4j.PropertyConfigurator;
 @Path("manual")
 public class GenericResource {
 
-  //  private final static Logger log = Logger.getLogger(GenericResource.class);
-  //  URL url = GenericResource.class.getResource("config/log4j.properties");
+    /*
+    *Variables necesarias para el logger de log4j
+    */
+    private final static Logger log = Logger.getLogger(GenericResource.class);
+    URL url = GenericResource.class.getResource("config/log4j.properties");
 
     @Context
     private UriInfo context;
@@ -61,8 +64,8 @@ public class GenericResource {
 
         buzzFizz bf = new buzzFizz();
 
-//        PropertyConfigurator.configure(url); //configuro el log
-      //  log.info("Inicio de servicio restful");
+        PropertyConfigurator.configure(url); //configuro el log
+        log.info("Inicio de servicio restful");
 
         /*
         *Metodos alojados en la clase buzzFizz que realizan los pasos necessarios para ejecutar el programa
@@ -70,7 +73,7 @@ public class GenericResource {
         bf.setNumeroInicial(Integer.parseInt(numInt));//se guarda en numeroInicial de buzzFizz el valor introducido por el usuario
         bf.obtenerLimite(); //se obtiene el limite indicado en el archivo de configuración
         bf.realizarJuego(); //se realiza la serie buzzFizz.
-      //  log.info("Inicio escritura con multithreading");
+        log.info("Inicio escritura con multithreading");
         bf.start(); //inicio el segundo hilo que escribe el archivo
         bf.crearSerieVista();//crea un String con la serie buzzFizz para presentarla como una lista
 
