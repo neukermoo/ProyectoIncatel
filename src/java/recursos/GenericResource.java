@@ -31,7 +31,7 @@ import org.apache.log4j.PropertyConfigurator;
  *
  * @author Jordi Gutierrez
  */
-@Path("manual")
+@Path("juego")
 public class GenericResource {
 
     /*

@@ -68,12 +68,12 @@ public class buzzFizz extends Thread {
         try {
 
             Properties p = new Properties();
-            p.load(new FileReader("C:\\Users\\Jordi Gutierrez\\Desktop\\SERVLETJSP\\Prueba webrest\\src\\java\\config\\config.properties"));
-            //p.load(new FileReader("src/java/config/config.properties"));
+            p.load(new FileReader("C:\\Users\\Jordi Gutierrez\\Desktop\\SERVLETJSP\\Proyecto1_Incatel\\src\\java\\config\\config.properties"));
+            // p.load(new FileReader("../config/config.properties"));
 
             numeroFinal = Integer.parseInt(p.getProperty("FinSerie"));
         } catch (FileNotFoundException ex) {
-            throw new PathException("Problema al encontrar el archivo. La ruta es absoluta, canviar a relativa o a la propia del ordenador!");
+            throw new PathException("Problema al encontrar el archivo con el limite. La ruta es absoluta, canviar a relativa o a la propia del ordenador!");
         } catch (IOException ex) {
             log.error("Error de IOException : " + ex);
         }
@@ -95,7 +95,7 @@ public class buzzFizz extends Thread {
 
     //for que recorre la lista con la serie y crea un String que se imprimira en la vista.
     public void crearSerieVista() {
-        resultadoVista = "<ul>";
+        resultadoVista = "<ul id='serieBuzzFizz'>";
 
         try {
             for (Object list : resultado) {
@@ -124,7 +124,8 @@ public class buzzFizz extends Thread {
             Date d = new Date();
             String serieConFecha = d + resultado.toString();
 
-            FileWriter fsortida = new FileWriter("C:\\Users\\Jordi Gutierrez\\Desktop\\SERVLETJSP\\Prueba webrest\\src\\java\\archivos\\series.txt", true);
+            FileWriter fsortida = new FileWriter("C:\\Users\\Jordi Gutierrez\\Desktop\\SERVLETJSP\\Proyecto1_Incatel\\src\\java\\archivos\\series.txt", true);
+            //FileWriter fsortida = new FileWriter("../archivos/series.txt", true);
 
             BufferedWriter bsortida = new BufferedWriter(fsortida);
             bsortida.write(serieConFecha);

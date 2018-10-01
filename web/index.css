@@ -1,0 +1,72 @@
+#contentMsg{
+    min-height: 50px;
+    display:flex;
+    justify-content: center;
+}
+
+#msg{
+    padding:1%;
+    margin:0;
+}
+
+
+#test{
+    position:absolute;
+    right:10px;
+    top:10px;
+    color:black;
+}
+
+
+#contentIni{
+    margin-top:20px;
+}
+
+#contentInstruccio{
+    display:flex;
+    justify-content: center;
+}
+
+
+#contentInp_btnIni{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+
+#gifAleatorio{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+
+#numIni{
+    text-align:center;
+    border:none;
+    font-size:20px;
+}
+#numIni:focus{
+    outline:0px;
+}
+
+
+#contentRange{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
+
+#rangeNumIni{
+    margin:10px 100px;
+    display:block;
+}
+
+#contentSerie{
+    column-count:7;
+    margin: 0 70px 50px 70px;
+}
+
+#contentSerie > ul{
+    list-style: none;
+}
+

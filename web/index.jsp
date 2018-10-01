@@ -7,100 +7,61 @@
 <%@page import="pruebas.velocidad"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <html>
     <head>
-        <title>TODO supply a title</title>
+        
+        <title>FUZZBIZZ</title>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+        <script src="index.js" type="text/javascript"></script>
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">        <link href="index.css" rel="stylesheet" type="text/css"/>
+
     </head>
-    <style>
-        #numIni{
-            text-align:center;
-        }
-        #content{
-            margin-top:10px;
-            column-count:7;
-        }
-    </style>
+
     <body>
-        <br>        <br>        <br>
 
-        <input type="text" size="5" id="numIni" name="NumeroIntroducido" maxlength="2">        
-        <input type="button" id="iniciar" value="Iniciar serie" >
+        <div id="contentMsg">
+            <p id="msg"></p>
+        </div>
+        <input class="btn btn-success" type="button" id="test" value="Peticiones por segundo">
 
-        <input type="button" id="ale" value="Aleatorio">
-
-        <input type="button" id="test" value="Peticiones por segundo">
+        <div id="contentIni">
+            <div id="contentInstruccio">
+                <p> Introduce el nº inicial de la serie
+            </div>
+            
+            <div id="contentInp_btnIni">
+                <img src="img/dado.gif" alt="" id="gifAleatorio"/>
+                <input type="text" size="5" id="numIni" name="NumeroIntroducido" maxlength="2" placeholder="50" value="0">        
+                <input class="btn btn-default" type="button" id="btnIniciar" value="Iniciar serie" >
+            </div>
+            
+            <div id="contentRange" class="form-group">
+                <input class="form-control" type="range" min="1" max="99" value="50" step="1" id="rangeNumIni" name="rangeNumIni">
+            </div>
+        </div>
         <br>
-        <p id="msg"></p>
 
-        <div id="content"></div>
+        <div id="contentSerie">
+            
+        </div>
 
     </body>
     <script>
-        $("#numIni").on("focus", function (e) {
-            $("#iniciar").prop("disabled", true);
-        });
-        $("#numIni").on("change", function (e) {
-            $("#content").html("");
-            if ($("#numIni").val() == "" || $("#numIni").val() == 0 || isNaN($("#numIni").val()) == true) {
-                $("#numIni").val("");
-                mostrarMensaje("Solo se pueden introducir numeros entre 1 y 99.");
-            } else {
-                $("#iniciar").prop("disabled", false);
-            }
-        });
-        $("#iniciar").on("click", function () {
-            mostrarSerie($("#numIni").val());
-        });
-        $("#ale").on("click", function () {
-            $("#numIni").val(numAle());
-            $("#iniciar").trigger("click");
-        });
         $("#test").on("click", function () {
         <%
             velocidad v = new velocidad();
             v.realizarPrueba300();
         %>
-            mostrarMensaje("<%= v.getMsg()%>");
+
+            $("#msg").html("<%= v.getMsg()%>");
+            $("#msg").css("background-color", "green");
+
         });
-        //Calcula un numero aleatorio entre 1 y 100
-        function numAle() {
-            return  Math.floor(((Math.random() * 100) + 1));
-        }
-
-        //Envia el control con Ajax al servicio rest
-        function mostrarSerie() {
-            $.ajax({
-                data: {"numIntr": arguments[0]},
-                type: "GET",
-                dataType: "json",
-                url: "http://localhost:8080/Prueba_webrest/webresources/manual"
-            })
-                    .done(function (data, textStatus, hqXHR) {
-                        $("#content").css("column-count", "7");
-                        $("#content").html(data.serie); //muestra los datos devueltos con el objectoJson
-                        if (console && console.log) {
-                            console.log("La solicitud se ha completado correctamente.");
-                        }
-                    })
-                    .fail(function (jqXHR, textStatus, errprThrown) {
-                        if (console && console.log) {
-                            console.log("La solicitud ha fallado: " + textStatus);
-                        }
-                    });
-        }
-
-        //Muestra informacion al usuario durante tres segundos
-        function mostrarMensaje(msg) {
-            $("#msg").html(msg);
-            setTimeout(function () {
-                $("#msg").html("");
-            }, '3000');
-        }
-
     </script>
 </html>

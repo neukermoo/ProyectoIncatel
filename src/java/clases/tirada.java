@@ -36,7 +36,7 @@ public class tirada {
             fb=true;
         }
         if(num % 5 == 0 ){
-            resultado +="fizz";
+            resultado +="buzz";
             fb=true; 
         }
         if(fb == false ){
